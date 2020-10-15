@@ -186,31 +186,35 @@ then("The case details have the correct information", () => {
 
 then("The comments have the correct information", () => {
     // Check that the element exist.
-    cy.wait('@commentsRoute');
-    cy.get('.item-value').contains('comment no. 1');
-    cy.get('.item-value').contains('William Jobs');
-    cy.get('.item-value').contains('comment no. 2');
-    cy.get('.item-value').contains('helen.kelly');
-    cy.get('.item-value').contains('comment no. 3');
-    cy.get('.item-value').contains('walter.bates');
-    cy.get('.item-value').contains('comment no. 4');
-    cy.get('.item-value').contains('anthony.nichols');
+    cy.wait('@commentsRoute').then(() => {
+        cy.get('.item-value').contains('comment no. 1');
+        cy.get('.item-value').contains('William Jobs');
+        cy.get('.item-value').contains('comment no. 2');
+        cy.get('.item-value').contains('helen.kelly');
+        cy.get('.item-value').contains('comment no. 3');
+        cy.get('.item-value').contains('walter.bates');
+        cy.get('.item-value').contains('comment no. 4');
+        cy.get('.item-value').contains('anthony.nichols');
+    });
 });
 
 then("The monitoring have the correct information for {string} tasks", (numberOfTasks) => {
     // Check that the element exist.
     switch (numberOfTasks) {
         case "9":
-            cy.wait('@9TasksRoute');
-            cy.get('.item-value').contains('Failed (9), Pending (9), Done (9)');
+            cy.wait('@9TasksRoute').then(() => {
+                cy.get('.item-value').contains('Failed (9), Pending (9), Done (9)');
+            });
             break;
         case "10":
-            cy.wait('@10TasksRoute');
-            cy.get('.item-value').contains('Failed (10), Pending (10), Done (10)');
+            cy.wait('@10TasksRoute').then(() => {
+                cy.get('.item-value').contains('Failed (10), Pending (10), Done (10)');
+            });
             break;
         case "11":
-            cy.wait('@10+TasksRoute');
-            cy.get('.item-value').contains('Failed (10+), Pending (10+), Done (10+)');
+            cy.wait('@10+TasksRoute').then(() => {
+                cy.get('.item-value').contains('Failed (10+), Pending (10+), Done (10+)');
+            });
             break;
         case "0":
             cy.wait('@0TasksRoute').then(() => {

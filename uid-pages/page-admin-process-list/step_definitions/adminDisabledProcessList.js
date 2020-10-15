@@ -131,7 +131,6 @@ given("The page response {string} is defined for disabled processes", (filterTyp
 
 when("I visit admin process list page", () => {
     cy.visit(url);
-    cy.wait(1000);
 });
 
 when("I click on Disabled tab", () => {

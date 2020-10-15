@@ -37,8 +37,9 @@ then('I\'m user with {string} bos_local', (text) => {
 });
 
 then('I see {string} button', (text) => {
-    cy.wait(['@tenant', '@session']);
-    cy.get('.ng-binding').should('have.text', text);
+    cy.wait(['@tenant', '@session']).then(() => {
+        cy.get('.ng-binding').should('have.text', text);
+    });
 });
 
 then('I see a modal that opened', () => {

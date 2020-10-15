@@ -109,15 +109,16 @@ then("The case details have the correct information", () => {
 
 then("The comments have the correct information", () => {
     // Check that the element exist.
-    cy.wait('@commentsRoute');
-    cy.get('.item-value').contains('comment no. 1');
-    cy.get('.item-value').contains('William Jobs');
-    cy.get('.item-value').contains('comment no. 2');
-    cy.get('.item-value').contains('helen.kelly');
-    cy.get('.item-value').contains('comment no. 3');
-    cy.get('.item-value').contains('walter.bates');
-    cy.get('.item-value').contains('comment no. 4');
-    cy.get('.item-value').contains('anthony.nichols');
+    cy.wait('@commentsRoute').then(() => {
+        cy.get('.item-value').contains('comment no. 1');
+        cy.get('.item-value').contains('William Jobs');
+        cy.get('.item-value').contains('comment no. 2');
+        cy.get('.item-value').contains('helen.kelly');
+        cy.get('.item-value').contains('comment no. 3');
+        cy.get('.item-value').contains('walter.bates');
+        cy.get('.item-value').contains('comment no. 4');
+        cy.get('.item-value').contains('anthony.nichols');
+    });
 });
 
 then("There are no search keys", () => {

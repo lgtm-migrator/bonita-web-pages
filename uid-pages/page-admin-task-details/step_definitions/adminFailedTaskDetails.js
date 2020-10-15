@@ -111,7 +111,6 @@ given("The response {string} is defined for failed tasks", (responseType) => {
 
 when("I visit the admin failed task details page", () => {
     cy.visit(url);
-    cy.wait(1000);
 });
 
 when("I fill in the new comment", () => {
@@ -184,15 +183,16 @@ then("The back button has correct href", () => {
 
 then("The comments have the correct information", () => {
     // Check that the element exist.
-    cy.wait('@commentsRoute');
-    cy.get('.item-value').contains('comment no. 1');
-    cy.get('.item-value').contains('William Jobs');
-    cy.get('.item-value').contains('comment no. 2');
-    cy.get('.item-value').contains('helen.kelly');
-    cy.get('.item-value').contains('comment no. 3');
-    cy.get('.item-value').contains('walter.bates');
-    cy.get('.item-value').contains('comment no. 4');
-    cy.get('.item-value').contains('anthony.nichols');
+    cy.wait('@commentsRoute').then(() => {
+        cy.get('.item-value').contains('comment no. 1');
+        cy.get('.item-value').contains('William Jobs');
+        cy.get('.item-value').contains('comment no. 2');
+        cy.get('.item-value').contains('helen.kelly');
+        cy.get('.item-value').contains('comment no. 3');
+        cy.get('.item-value').contains('walter.bates');
+        cy.get('.item-value').contains('comment no. 4');
+        cy.get('.item-value').contains('anthony.nichols');
+    });
 });
 
 then("{string} is shown at the end of the comments", (text) => {
@@ -221,20 +221,21 @@ then("The new comment input is empty", () => {
 });
 
 then("The connectors section have the correct information", () => {
-    cy.wait('@connectorRoute');
-    cy.get('h4').eq(1).contains('Connectors');
-    cy.get('h5').eq(0).contains('Failed');
-    cy.get('button.btn-link').contains('failedConnectorName').should('be.visible');
-    cy.get('.item-value').contains('failedConnectorName').should('not.be.visible');
-    cy.get('h5').eq(1).contains('To be executed');
-    cy.get('.item-value').contains('throwException');
-    cy.get('.item-value').contains('throwNewException1');
-    cy.get('.item-value').contains('throwNewException2');
-    cy.get('.item-value').contains('throwNewException3');
-    cy.get('h5').eq(2).contains('Executed');
-    cy.get('.item-value').contains('throwNewException6');
-    cy.get('h5').eq(3).contains('Skipped');
-    cy.get('.item-value').contains('skippedConnector');
+    cy.wait('@connectorRoute').then(() => {
+        cy.get('h4').eq(1).contains('Connectors');
+        cy.get('h5').eq(0).contains('Failed');
+        cy.get('button.btn-link').contains('failedConnectorName').should('be.visible');
+        cy.get('.item-value').contains('failedConnectorName').should('not.be.visible');
+        cy.get('h5').eq(1).contains('To be executed');
+        cy.get('.item-value').contains('throwException');
+        cy.get('.item-value').contains('throwNewException1');
+        cy.get('.item-value').contains('throwNewException2');
+        cy.get('.item-value').contains('throwNewException3');
+        cy.get('h5').eq(2).contains('Executed');
+        cy.get('.item-value').contains('throwNewException6');
+        cy.get('h5').eq(3).contains('Skipped');
+        cy.get('.item-value').contains('skippedConnector');
+    });
 });
 
 then("The connectors section is empty", () => {
@@ -313,15 +314,15 @@ then("There is a confirmation for task being successfully replayed", () => {
         expect(body[1].state).to.equal("skipped");
         expect(body[2].id).to.equal("80025");
         expect(body[2].state).to.equal("toReExecute");
-    });
-    cy.contains('.modal', 'The task has been replayed successfully. Close this window to check its new status.').should('be.visible');
-    cy.contains('.modal-footer button', 'Replay').should('be.visible');
-    cy.contains('.modal-footer button', 'Cancel').should('not.exist');
-    cy.contains('.modal-footer button', 'Close').should('be.visible');
-    cy.contains('.modal-footer button', 'Close').should('be.visible');
-    cy.get('.modal-body input[type="checkbox"]').should('have.length', 3);
-    cy.get('.modal-body input[type="checkbox"]').each((checkbox) => {
-        cy.wrap(checkbox).should('be.disabled');
+        cy.contains('.modal', 'The task has been replayed successfully. Close this window to check its new status.').should('be.visible');
+        cy.contains('.modal-footer button', 'Replay').should('be.visible');
+        cy.contains('.modal-footer button', 'Cancel').should('not.exist');
+        cy.contains('.modal-footer button', 'Close').should('be.visible');
+        cy.contains('.modal-footer button', 'Close').should('be.visible');
+        cy.get('.modal-body input[type="checkbox"]').should('have.length', 3);
+        cy.get('.modal-body input[type="checkbox"]').each((checkbox) => {
+            cy.wrap(checkbox).should('be.disabled');
+        });
     });
 });
 

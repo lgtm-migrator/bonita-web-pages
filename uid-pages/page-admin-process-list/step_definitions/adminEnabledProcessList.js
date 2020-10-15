@@ -120,7 +120,6 @@ given("The page response {string} is defined", (filterType) => {
 
 when("I visit admin process list page", () => {
     cy.visit(url);
-    cy.wait(1000);
 });
 
 when("I put {string} in {string} filter field", (filterValue, filterType) => {

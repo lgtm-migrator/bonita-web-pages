@@ -203,7 +203,6 @@ given("The response {string} is defined", (responseType) => {
 
 when("I visit the admin roles page", () => {
     cy.visit(url);
-    cy.wait(1000);
 });
 
 when("I click on Load more roles button", () => {

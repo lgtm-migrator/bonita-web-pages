@@ -245,7 +245,6 @@ given('The current language in BOS_Locale is {string}', (language) => {
 
 when('I visit the index page', () => {
     cy.visit(url);
-    cy.wait('@app1Route');
 });
 
 when('I click the user name', () => {
@@ -531,19 +530,22 @@ then ('I see only the filtered applications by {string} in desktop', (type)=> {
     var appNameSelectorForDestop = '.app-name-in-list a';
     switch (type) {
         case 'name':
-            cy.wait('@filteredAppsListMyFirstRoute');
-            cy.get(appNameSelectorForDestop).eq(0).should('be.visible').should('have.text', 'My first app');
-            cy.get(appNameSelectorForDestop).eq(1).should('be.visible').should('have.text', 'My first app administrator');
+            cy.wait('@filteredAppsListMyFirstRoute').then(() => {
+                cy.get(appNameSelectorForDestop).eq(0).should('be.visible').should('have.text', 'My first app');
+                cy.get(appNameSelectorForDestop).eq(1).should('be.visible').should('have.text', 'My first app administrator');
+            });
             break;
         case 'token':
-            cy.wait('@filteredAppsListapp1Route');
-            cy.get(appNameSelectorForDestop).eq(0).should('be.visible').should('have.text', 'My first app');
-            cy.get(appNameSelectorForDestop).eq(1).should('not.exist');
+            cy.wait('@filteredAppsListapp1Route').then(() => {;
+                cy.get(appNameSelectorForDestop).eq(0).should('be.visible').should('have.text', 'My first app');
+                cy.get(appNameSelectorForDestop).eq(1).should('not.exist');
+            });
             break;
         case 'version':
-            cy.wait('@filteredAppsList105Route');
-            cy.get(appNameSelectorForDestop).eq(0).should('be.visible').should('have.text', 'My first app');
-            cy.get(appNameSelectorForDestop).eq(1).should('not.exist');
+            cy.wait('@filteredAppsList105Route').then(() => {;
+                cy.get(appNameSelectorForDestop).eq(0).should('be.visible').should('have.text', 'My first app');
+                cy.get(appNameSelectorForDestop).eq(1).should('not.exist');
+            });
             break;
     }
     cy.get(appNameSelectorForDestop).eq(2).should('not.exist');
@@ -574,9 +576,10 @@ then('I see only my administrator apps', () => {
 });
 
 then('I see only the app with correct profile and name', () => {
-    cy.wait('@filteredAppsListAdminProfileMyFirstRoute');
-    cy.get('.app-name-in-list a').eq(0).should('be.visible').should('have.text', 'My first app administrator');
-    cy.get('.app-name-in-list a').eq(1).should('not.exist');
+    cy.wait('@filteredAppsListAdminProfileMyFirstRoute').then(() => {
+        cy.get('.app-name-in-list a').eq(0).should('be.visible').should('have.text', 'My first app administrator');
+        cy.get('.app-name-in-list a').eq(1).should('not.exist');
+    });
 });
 
 then('I don\'t see any apps', () => {

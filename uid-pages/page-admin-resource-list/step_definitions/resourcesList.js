@@ -331,21 +331,22 @@ then("A list of {string} resources is displayed", (nbrOfResources) => {
 then("I see only the filtered resources by {string}", (filterType) => {
     switch (filterType) {
         case 'content type':
-            cy.wait('@resourcesPagesRoute');
-            cy.get('.resource-item').eq(0).within(() => {
-                cy.get('.resource-property-value').contains('Page 1');
-            });
+            cy.wait('@resourcesPagesRoute').then(() => {
+                cy.get('.resource-item').eq(0).within(() => {
+                    cy.get('.resource-property-value').contains('Page 1');
+                });
 
-            cy.get('.resource-item').eq(1).within(() => {
-                cy.get('.resource-property-value').contains('Page 2');
-            });
+                    cy.get('.resource-item').eq(1).within(() => {
+                        cy.get('.resource-property-value').contains('Page 2');
+                });
 
-            cy.get('.resource-item').eq(2).within(() => {
-                cy.get('.resource-property-value').contains('Page 3');
-            });
+                    cy.get('.resource-item').eq(2).within(() => {
+                        cy.get('.resource-property-value').contains('Page 3');
+                });
 
-            cy.get('.resource-item').eq(3).within(() => {
-                cy.get('.resource-property-value').contains('Page 4');
+                    cy.get('.resource-item').eq(3).within(() => {
+                        cy.get('.resource-property-value').contains('Page 4');
+                });
             });
             break;
 

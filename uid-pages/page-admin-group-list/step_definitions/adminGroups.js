@@ -274,7 +274,6 @@ given("The response {string} is defined", (responseType) => {
 
 when("I visit the admin groups page", () => {
     cy.visit(url);
-    cy.wait(1000);
 });
 
 when("I put {string} in {string} filter field", (filterValue, filterType) => {

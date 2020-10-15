@@ -1,6 +1,9 @@
-const archivedCaseUrl = 'build/dist/resources/index.html?id=30003';
-const openCaseUrl = 'build/dist/resources/index.html?id=30004';
-const caseUrlWithoutId = 'build/dist/resources/index.html?id=';
+const urlPrefix = 'build/dist/';
+const archivedCaseUrl = 'API/bpm/archivedCase';
+const openCaseUrl = 'API/bpm/case';
+const archivedCasePage = urlPrefix + 'resources/index.html?id=30003';
+const openCasePage = urlPrefix + 'resources/index.html?id=30004';
+const caseUrlWithoutId = urlPrefix + 'resources/index.html?id=';
 const trimSpaces = (element) => element.text().trim();
 
 given('The archived case {string} server response is defined', (archivedCaseId) => {
@@ -8,7 +11,7 @@ given('The archived case {string} server response is defined', (archivedCaseId) 
     cy.fixture('json/archivedCase.json').as('archivedCase');
     cy.route({
         method: 'GET',
-        url: 'build/dist/API/bpm/archivedCase?c=1&d=started_by?d=startedBySubstitute&d=processDefinitionId&f=sourceObjectId=' + archivedCaseId + '&p=0',
+        url: urlPrefix + archivedCaseUrl + '?c=1&d=started_by?d=startedBySubstitute&d=processDefinitionId&f=sourceObjectId=' + archivedCaseId + '&p=0',
         response: '@archivedCase'
     }).as('archivedCaseRoute');
 });
@@ -18,7 +21,7 @@ given('The archived case {string} empty context server response is defined', (ar
     cy.fixture('json/archivedCaseEmptyContext.json').as('archivedCaseEmptyContext');
     cy.route({
         method: 'GET',
-        url: 'build/dist/API/bpm/archivedCase/' + archivedCaseId + '/context',
+        url: urlPrefix + archivedCaseUrl + '/' + archivedCaseId + '/context',
         response: '@archivedCaseEmptyContext'
     }).as('archivedCaseEmptyContextRoute');
 });
@@ -28,7 +31,7 @@ given('The archived case {string} empty document server response is defined', (a
     cy.fixture('json/archivedCaseEmptyDocument.json').as('archivedCaseEmptyDocument');
     cy.route({
         method: 'GET',
-        url: 'build/dist/API/bpm/archivedCaseDocument?f=caseId=' + archivedCaseId,
+        url: urlPrefix + 'API/bpm/archivedCaseDocument?f=caseId=' + archivedCaseId,
         response: '@archivedCaseEmptyDocument'
     }).as('archivedCaseEmptyDocumentRoute');
 });
@@ -38,7 +41,7 @@ given('The open case {string} server response is defined', (openCaseId) => {
     cy.fixture('json/openCase.json').as('openCase');
     cy.route({
         method: 'GET',
-        url: 'build/dist/API/bpm/case/' + openCaseId + '?d=started_by?d=startedBySubstitute&d=processDefinitionId',
+        url: urlPrefix + openCaseUrl + '/' + openCaseId + '?d=started_by?d=startedBySubstitute&d=processDefinitionId',
         response: '@openCase'
     }).as('openCaseRoute');
 });
@@ -49,7 +52,7 @@ given('The open case {string} empty context server response is defined', (openCa
     cy.fixture('json/openCaseEmptyContext.json').as('openCaseEmptyContext');
     cy.route({
         method: 'GET',
-        url: 'build/dist/API/bpm/case/' + openCaseId + '/context',
+        url: urlPrefix + openCaseUrl + '/' + openCaseId + '/context',
         response: '@openCaseEmptyContext'
     }).as('openCaseEmptyContextRoute');
 });
@@ -59,7 +62,7 @@ given('The open case {string} empty document server response is defined', (openC
     cy.fixture('json/openCaseEmptyDocument.json').as('openCaseEmptyDocument');
     cy.route({
         method: 'GET',
-        url: 'build/dist/API/bpm/caseDocument?f=caseId=' + openCaseId,
+        url: urlPrefix + 'API/bpm/caseDocument?f=caseId=' + openCaseId,
         response: '@openCaseEmptyDocument'
     }).as('openCaseEmptyDocumentRoute');
 });
@@ -69,7 +72,7 @@ given('The open case {string} context server response is defined', (openCaseId) 
     cy.fixture('json/openCaseContext.json').as('openCaseContext');
     cy.route({
         method: 'GET',
-        url: 'build/dist/API/bpm/case/' + openCaseId + '/context',
+        url: urlPrefix + openCaseUrl + '/' + openCaseId + '/context',
         response: '@openCaseContext'
     }).as('openCaseContextRoute');
 });
@@ -89,7 +92,7 @@ given('The open case {string} started by system response is defined', (openCaseI
     cy.fixture('json/openCaseStartedBySystem.json').as('openCaseStartedBySystem');
     cy.route({
         method: 'GET',
-        url: 'build/dist/API/bpm/case/' + openCaseId + '?d=started_by?d=startedBySubstitute&d=processDefinitionId',
+        url: urlPrefix + openCaseUrl + '/' + openCaseId + '?d=started_by?d=startedBySubstitute&d=processDefinitionId',
         response: '@openCaseStartedBySystem'
     }).as('openCaseStartedBySystemRoute');
 });
@@ -99,7 +102,7 @@ given('The open case {string} started by system for user response is defined', (
     cy.fixture('json/openCaseStartedBySystemForUser.json').as('openCaseStartedBySystemForUser');
     cy.route({
         method: 'GET',
-        url: 'build/dist/API/bpm/case/' + openCaseId + '?d=started_by?d=startedBySubstitute&d=processDefinitionId',
+        url: urlPrefix + openCaseUrl + '/' + openCaseId + '?d=started_by?d=startedBySubstitute&d=processDefinitionId',
         response: '@openCaseStartedBySystemForUser'
     }).as('openCaseStartedBySystemForUserRoute');
 });
@@ -109,7 +112,7 @@ given('The open case {string} started by system for user without first name resp
     cy.fixture('json/openCaseStartedBySystemForUserWithoutFirstName.json').as('openCaseStartedBySystemForUserWithoutFirstName');
     cy.route({
         method: 'GET',
-        url: 'build/dist/API/bpm/case/' + openCaseId + '?d=started_by?d=startedBySubstitute&d=processDefinitionId',
+        url: urlPrefix + openCaseUrl + '/' + openCaseId + '?d=started_by?d=startedBySubstitute&d=processDefinitionId',
         response: '@openCaseStartedBySystemForUserWithoutFirstName'
     }).as('openCaseStartedBySystemForUserWithoutFirstNameRoute');
 });
@@ -119,7 +122,7 @@ given('The open case {string} started by system for user without last name respo
     cy.fixture('json/openCaseStartedBySystemForUserWithoutLastName.json').as('openCaseStartedBySystemForUserWithoutLastName');
     cy.route({
         method: 'GET',
-        url: 'build/dist/API/bpm/case/' + openCaseId + '?d=started_by?d=startedBySubstitute&d=processDefinitionId',
+        url: urlPrefix + openCaseUrl + '/' + openCaseId + '?d=started_by?d=startedBySubstitute&d=processDefinitionId',
         response: '@openCaseStartedBySystemForUserWithoutLastName'
     }).as('openCaseStartedBySystemForUserWithoutLastNameRoute');
 });
@@ -129,7 +132,7 @@ given('The open case {string} started by user for another user', (openCaseId) =>
     cy.fixture('json/openCaseStartedByUserForUser.json').as('openCaseStartedByUserForUser');
     cy.route({
         method: 'GET',
-        url: 'build/dist/API/bpm/case/' + openCaseId + '?d=started_by?d=startedBySubstitute&d=processDefinitionId',
+        url: urlPrefix + openCaseUrl + '/' + openCaseId + '?d=started_by?d=startedBySubstitute&d=processDefinitionId',
         response: '@openCaseStartedByUserForUser'
     }).as('openCaseStartedByUserForUserRoute');
 });
@@ -138,13 +141,13 @@ given('A list of executed tasks server response is defined', () => {
     cy.fixture('json/openTask.json').as('openTask');
     cy.route({
         method: 'GET',
-        url: 'build/dist/API/bpm/task?p=0&c=999&d=executedBy&d=executedBySubstitute*',
+        url: urlPrefix + 'API/bpm/task?p=0&c=999&d=executedBy&d=executedBySubstitute*',
         response: '@openTask'
     }).as('openTaskRoute');
     cy.fixture('json/archivedTaskExecutedByUser.json').as('archivedTaskExecutedByUser');
     cy.route({
         method: 'GET',
-        url: 'build/dist/API/bpm/archivedHumanTask?p=0&c=999&d=executedBy&d=executedBySubstitute*',
+        url: urlPrefix + 'API/bpm/archivedHumanTask?p=0&c=999&d=executedBy&d=executedBySubstitute*',
         response: '@archivedTaskExecutedByUser'
     }).as('archivedTaskExecutedByUserRoute');
 });
@@ -153,13 +156,13 @@ given('A list of executed tasks by system for user server response is defined', 
     cy.fixture('json/openTask.json').as('openTask');
     cy.route({
         method: 'GET',
-        url: 'build/dist/API/bpm/task?p=0&c=999&d=executedBy&d=executedBySubstitute*',
+        url: urlPrefix + 'API/bpm/task?p=0&c=999&d=executedBy&d=executedBySubstitute*',
         response: '@openTask'
     }).as('openTaskRoute');
     cy.fixture('json/archivedTaskExecutedBySystemForUser.json').as('archivedTaskExecutedBySystemForUser');
     cy.route({
         method: 'GET',
-        url: 'build/dist/API/bpm/archivedHumanTask?p=0&c=999&d=executedBy&d=executedBySubstitute*',
+        url: urlPrefix + 'API/bpm/archivedHumanTask?p=0&c=999&d=executedBy&d=executedBySubstitute*',
         response: '@archivedTaskExecutedBySystemForUser'
     }).as('archivedTaskExecutedBySystemForUserRoute');
 });
@@ -168,23 +171,23 @@ given('A list of executed tasks by user for user server response is defined', ()
     cy.fixture('json/openTask.json').as('openTask');
     cy.route({
         method: 'GET',
-        url: 'build/dist/API/bpm/task?p=0&c=999&d=executedBy&d=executedBySubstitute*',
+        url: urlPrefix + 'API/bpm/task?p=0&c=999&d=executedBy&d=executedBySubstitute*',
         response: '@openTask'
     }).as('openTaskRoute');
     cy.fixture('json/archivedTaskExecutedByUserForUser.json').as('archivedTaskExecutedByUserForUser');
     cy.route({
         method: 'GET',
-        url: 'build/dist/API/bpm/archivedHumanTask?p=0&c=999&d=executedBy&d=executedBySubstitute*',
+        url: urlPrefix + 'API/bpm/archivedHumanTask?p=0&c=999&d=executedBy&d=executedBySubstitute*',
         response: '@archivedTaskExecutedByUserForUser'
     }).as('archivedTaskExecutedByUserForUserRoute');
 });
 
 when('I visit the archived case index page', () => {
-    cy.visit(archivedCaseUrl);
+    cy.visit(archivedCasePage);
 });
 
 when('I visit the open case index page', () => {
-    cy.visit(openCaseUrl);
+    cy.visit(openCasePage);
 });
 
 when('I visit the open case index page without an id', () => {
@@ -192,14 +195,16 @@ when('I visit the open case index page without an id', () => {
 });
 
 then('I can see both IDs have correct values', () => {
-    cy.wait('@archivedCaseEmptyContextRoute');
-    cy.get('pb-title').contains('Case id').contains('10002');
-    cy.get('pb-title').contains('Archived case id').contains('30003');
+    cy.wait('@archivedCaseRoute').then(() => {
+        cy.get('pb-title').contains('Case id').contains('10002');
+        cy.get('pb-title').contains('Archived case id').contains('30003');
+    });
 });
 
 then('I can see the open case ID', () => {
-    cy.wait('@openCaseEmptyContextRoute');
-    cy.get('pb-title').contains('Case id').contains('30004');
+    cy.wait('@openCaseRoute').then(() => {
+        cy.get('pb-title').contains('Case id').contains('30004');
+    });
 });
 
 then('I cannot see the archived case ID', () => {

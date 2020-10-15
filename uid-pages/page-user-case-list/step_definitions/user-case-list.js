@@ -636,25 +636,26 @@ then("I see only the filtered open cases by {string}", (filterType)=>{
     cy.server();
     switch (filterType) {
         case 'process name':
-            cy.wait('@openCasesFilteredByProcessNameRoute');
-            cy.get('.case-item:visible').eq(0).within(() => {
-                cy.get('.case-property-value').contains('2001');
-                cy.get('.case-property-value').contains('Another My Pool (1.0)');
-            });
+            cy.wait('@openCasesFilteredByProcessNameRoute').then(() => {
+                cy.get('.case-item:visible').eq(0).within(() => {
+                    cy.get('.case-property-value').contains('2001');
+                    cy.get('.case-property-value').contains('Another My Pool (1.0)');
+                });
 
-            cy.get('.case-item:visible').eq(1).within(() => {
-                cy.get('.case-property-value').contains('32001');
-                cy.get('.case-property-value').contains('Another My Pool (1.0)');
-            });
+                cy.get('.case-item:visible').eq(1).within(() => {
+                    cy.get('.case-property-value').contains('32001');
+                    cy.get('.case-property-value').contains('Another My Pool (1.0)');
+                });
 
-            cy.get('.case-item:visible').eq(2).within(() => {
-                cy.get('.case-property-value').contains('22001');
-                cy.get('.case-property-value').contains('Another My Pool (1.0)');
-            });
+                cy.get('.case-item:visible').eq(2).within(() => {
+                    cy.get('.case-property-value').contains('22001');
+                    cy.get('.case-property-value').contains('Another My Pool (1.0)');
+                });
 
-            cy.get('.case-item:visible').eq(3).within(() => {
-                cy.get('.case-property-value').contains('12001');
-                cy.get('.case-property-value').contains('Another My Pool (1.0)');
+                cy.get('.case-item:visible').eq(3).within(() => {
+                    cy.get('.case-property-value').contains('12001');
+                    cy.get('.case-property-value').contains('Another My Pool (1.0)');
+                });
             });
             break;
 
@@ -685,25 +686,26 @@ then("I see only the filtered open cases by {string}", (filterType)=>{
 then("I see only the filtered archived cases by {string}", (filterType)=>{
     switch (filterType) {
         case 'process name':
-            cy.wait('@archivedCasesFilteredByProcessNameRoute');
-            cy.get('.case-item:visible').eq(0).within(() => {
-                cy.get('.case-property-value').contains('1004');
-                cy.get('.case-property-value').contains('Another My Pool (1.0)');
-            });
+            cy.wait('@archivedCasesFilteredByProcessNameRoute').then(() => {
+                cy.get('.case-item:visible').eq(0).within(() => {
+                    cy.get('.case-property-value').contains('1004');
+                    cy.get('.case-property-value').contains('Another My Pool (1.0)');
+                });
 
-            cy.get('.case-item:visible').eq(1).within(() => {
-                cy.get('.case-property-value').contains('2004');
-                cy.get('.case-property-value').contains('Another My Pool (1.0)');
-            });
+                cy.get('.case-item:visible').eq(1).within(() => {
+                    cy.get('.case-property-value').contains('2004');
+                    cy.get('.case-property-value').contains('Another My Pool (1.0)');
+                });
 
-            cy.get('.case-item:visible').eq(2).within(() => {
-                cy.get('.case-property-value').contains('3004');
-                cy.get('.case-property-value').contains('Another My Pool (1.0)');
-            });
+                cy.get('.case-item:visible').eq(2).within(() => {
+                    cy.get('.case-property-value').contains('3004');
+                    cy.get('.case-property-value').contains('Another My Pool (1.0)');
+                });
 
-            cy.get('.case-item:visible').eq(3).within(() => {
-                cy.get('.case-property-value').contains('4004');
-                cy.get('.case-property-value').contains('Another My Pool (1.0)');
+                cy.get('.case-item:visible').eq(3).within(() => {
+                    cy.get('.case-property-value').contains('4004');
+                    cy.get('.case-property-value').contains('Another My Pool (1.0)');
+                });
             });
             break;
 

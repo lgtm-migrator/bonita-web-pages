@@ -43,7 +43,6 @@ given("The response {string} is defined for done tasks", (responseType) => {
 
 when("I visit the admin done task details page", () => {
     cy.visit(url);
-    cy.wait(1000);
 });
 
 then("The done task details have the correct information", () => {
@@ -80,11 +79,12 @@ then("The back button has correct href", () => {
 
 then("The connectors have the correct information", () => {
     // Check that the element exist.
-    cy.wait('@connectorRoute');
-    cy.get('.item-label').contains('Failed');
-    cy.get('.item-value').contains('throwNewException');
-    cy.get('.item-label').contains('comment no. 2');
-    cy.get('.item-value').contains('helen.kelly');
+    cy.wait('@connectorRoute').then(() => {
+        cy.get('.item-label').contains('Failed');
+        cy.get('.item-value').contains('throwNewException');
+        cy.get('.item-label').contains('comment no. 2');
+        cy.get('.item-value').contains('helen.kelly');
+    });
 });
 
 then("The state is {string}", (state) => {
@@ -101,30 +101,32 @@ then("The input placeholder is not {string}", (placeholder) => {
 
 then("The comments have the correct information", () => {
     // Check that the element exist.
-    cy.wait('@commentsRoute');
-    cy.get('.item-value').contains('comment no. 1');
-    cy.get('.item-value').contains('William Jobs');
-    cy.get('.item-value').contains('comment no. 2');
-    cy.get('.item-value').contains('helen.kelly');
-    cy.get('.item-value').contains('comment no. 3');
-    cy.get('.item-value').contains('walter.bates');
-    cy.get('.item-value').contains('comment no. 4');
-    cy.get('.item-value').contains('anthony.nichols');
+    cy.wait('@commentsRoute').then(() => {
+        cy.get('.item-value').contains('comment no. 1');
+        cy.get('.item-value').contains('William Jobs');
+        cy.get('.item-value').contains('comment no. 2');
+        cy.get('.item-value').contains('helen.kelly');
+        cy.get('.item-value').contains('comment no. 3');
+        cy.get('.item-value').contains('walter.bates');
+        cy.get('.item-value').contains('comment no. 4');
+        cy.get('.item-value').contains('anthony.nichols');
+    });
 });
 
 then("The done task details show the connectors correctly", () => {
-    cy.wait('@archivedConnectorRoute');
-    cy.get('h4').eq(1).contains('Connectors');
-    cy.get('h5').eq(0).contains('Failed');
-    cy.get('.btn-link').contains('failedConnectorName').should('not.be.visible');
-    cy.get('.item-value').contains('failedConnectorName').should('be.visible');
-    cy.get('h5').eq(1).contains('To be executed');
-    cy.get('.item-value').contains('throwException');
-    cy.get('.item-value').contains('throwNewException1');
-    cy.get('.item-value').contains('throwNewException2');
-    cy.get('.item-value').contains('throwNewException3');
-    cy.get('h5').eq(2).contains('Executed');
-    cy.get('.item-value').contains('throwNewException6');
-    cy.get('h5').eq(3).contains('Skipped');
-    cy.get('.item-value').contains('skippedConnector');
+    cy.wait('@archivedConnectorRoute').then(() => {
+        cy.get('h4').eq(1).contains('Connectors');
+        cy.get('h5').eq(0).contains('Failed');
+        cy.get('.btn-link').contains('failedConnectorName').should('not.be.visible');
+        cy.get('.item-value').contains('failedConnectorName').should('be.visible');
+        cy.get('h5').eq(1).contains('To be executed');
+        cy.get('.item-value').contains('throwException');
+        cy.get('.item-value').contains('throwNewException1');
+        cy.get('.item-value').contains('throwNewException2');
+        cy.get('.item-value').contains('throwNewException3');
+        cy.get('h5').eq(2).contains('Executed');
+        cy.get('.item-value').contains('throwNewException6');
+        cy.get('h5').eq(3).contains('Skipped');
+        cy.get('.item-value').contains('skippedConnector');
+    });
 });

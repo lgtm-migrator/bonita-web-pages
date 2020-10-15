@@ -107,7 +107,6 @@ given("The do for status code {int} is defined for pending tasks", (errorCode) =
 
 when("I visit the admin pending task details page", () => {
     cy.visit(url);
-    cy.wait(1000);
 });
 
 when("I click on assign button", () => {
